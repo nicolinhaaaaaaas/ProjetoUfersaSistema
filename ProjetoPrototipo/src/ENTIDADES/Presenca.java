@@ -1,5 +1,5 @@
 package ProjetoPrototipo.src.ENTIDADES;
-import java.util.*;
+import java.sql.*;
 
 public class Presenca {
     private int idPresenca;

@@ -1,10 +1,9 @@
 package ProjetoPrototipo.src.DAOs;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import ProjetoPrototipo.src.ENTIDADES.Aluno;
+import ProjetoPrototipo.src.ENTIDADES.*;
 
 public class AlunoDao {
     private static Connection conexaoAluno;
@@ -60,6 +59,7 @@ public class AlunoDao {
             preparedStatement.setString(1, aluno.getNome());
             preparedStatement.setString(2, aluno.getEmail());
             preparedStatement.setString(3, aluno.getSenha());
+            preparedStatement.setInt(4, aluno.getNumeroMatricula());
 
             preparedStatement.executeUpdate();
         }
@@ -73,5 +73,5 @@ public class AlunoDao {
 
         return new Aluno(matricula, nome, email, senha);
     }
-    
+
 }

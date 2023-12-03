@@ -246,7 +246,7 @@ public class Main {
     // Submenus do Estudante
     public static void opcoesMatriculaEstudante(){
         System.out.println(">>>MENU DE MATRÍCULA");
-        System.out.println("(1)- Realizar Matrícula");
+        System.out.println("(1)- Realizar Matrícula em uma disciplina");
         System.out.println("(2)- Cancelamento de disciplina");
         System.out.println("(3)- Ver comprovante de matrícula");
         System.out.println("(0)- Voltar\n");
