@@ -53,4 +53,18 @@ public class Presenca {
     public void setPresente(boolean presente) {
         this.presente = presente;
     }
+
+    public String toString(){
+        String saida = "";
+        saida += "Aluno: "+this.aluno.getNome();
+        saida += "\tTurma: "+this.turma.getNome();
+        saida += "\tData: "+this.data;
+        if(this.presente == true){
+            saida += "\tStatus: PRESENTE\n";
+        }
+        else{
+            saida += "\tStatus: FALTA\n";
+        }
+        return saida;
+    }
 }

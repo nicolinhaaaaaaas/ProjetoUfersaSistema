@@ -71,4 +71,15 @@ public class Avaliacao {
         this.notaRecuperacao = notaRecuperacao;
     }
 
+    public String toString(){
+        String saida = "";
+        saida += "Aluno: "+this.getAluno().getNome();
+        saida += "\tTurma: "+this.getTurma().getNome();
+        
+        saida += "\nNota 1: "+this.nota1;
+        saida += "\tNota 2: "+this.nota2;
+        saida += "\tNota 3: "+this.nota3;
+        saida += "\tNota de Recuperação: "+this.notaRecuperacao+"\n";
+        return saida;
+    }
 }

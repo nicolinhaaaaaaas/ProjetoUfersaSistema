@@ -38,6 +38,38 @@ public class AlunoDao {
         return null;
     }
 
+    public static Aluno buscarAlunoPorLoginSenha(String email, String senha) throws SQLException{
+        String sql = "SELECT * FROM aluno WHERE email_aluno = ? AND senha_aluno = ?;";
+
+        try(PreparedStatement preparedStatement = conexaoAluno.prepareStatement(sql)){
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, senha);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return mapearResultSetParaAluno(resultSet);
+                }
+            }
+        }
+        return null;
+    }
+
+    public static boolean verificarLoginDisponivel(String email) throws SQLException{
+        String sql = "SELECT * FROM aluno WHERE email_aluno = ?;";
+
+        try(PreparedStatement preparedStatement = conexaoAluno.prepareStatement(sql)){
+            preparedStatement.setString(1, email);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return true;
+                } else{
+                    return false;
+                }
+            }
+        }
+    }
+
     public static List<Aluno> listarTodosAlunos() throws SQLException{
         List<Aluno> alunos = new ArrayList<>();
         String sql = "SELECT * FROM aluno;";

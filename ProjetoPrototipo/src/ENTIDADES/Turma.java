@@ -53,4 +53,13 @@ public class Turma {
         this.professor = professor;
     }
     
+    public String toString(){
+        String saida = "";
+        saida += "ID da Turma: "+this.idTurma;
+        saida += "\tComponente Curricular: "+this.nome;
+        saida += "\tLocal: "+this.local;
+        saida += "\tHorário: "+this.horario;
+        saida += "\nProfessor Responsável: "+this.professor.getNomeProfessor()+"\n";
+        return saida;
+    }
 }

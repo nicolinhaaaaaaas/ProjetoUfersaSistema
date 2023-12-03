@@ -38,6 +38,38 @@ public class ProfessorDao {
         return null;
     }
 
+    public static Professor buscarProfessorPorLoginSenha(String email, String senha) throws SQLException{
+        String sql = "SELECT * FROM professor WHERE email_professor = ? AND senha_professor = ?;";
+
+        try(PreparedStatement preparedStatement = conexaoProfessor.prepareStatement(sql)){
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, senha);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return mapearResultSetParaProfessor(resultSet);
+                }
+            }
+        }
+        return null;
+    }
+
+    public static boolean verificarLoginDisponivel(String email) throws SQLException{
+        String sql = "SELECT * FROM professor WHERE email_professor = ?;";
+
+        try(PreparedStatement preparedStatement = conexaoProfessor.prepareStatement(sql)){
+            preparedStatement.setString(1, email);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return true;
+                } else{
+                    return false;
+                }
+            }
+        }
+    }
+
     public static List<Professor> listarTodosprofessores() throws SQLException{
         List<Professor> professores = new ArrayList<>();
         String sql = "SELECT * FROM professor;";

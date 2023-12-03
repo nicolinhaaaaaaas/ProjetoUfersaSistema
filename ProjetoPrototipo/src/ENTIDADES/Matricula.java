@@ -34,4 +34,11 @@ public class Matricula {
     public void setTurma(Turma turma) {
         this.turma = turma;
     }
+
+    public String toString(){
+        String saida = "";
+        saida += "Aluno: "+this.aluno.getNome();
+        saida += "\tTurma: "+this.turma.getNome()+"\n";
+        return saida;
+    }
 }

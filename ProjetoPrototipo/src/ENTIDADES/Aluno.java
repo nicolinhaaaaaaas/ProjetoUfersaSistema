@@ -43,5 +43,14 @@ public class Aluno {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+
+    public String toString(){
+        String saida = "";
+        saida += "Nº Matrícula: "+this.numeroMatricula;
+        saida += "\tNome: "+this.nome;
+        saida += "\tLogin: "+this.email;
+        saida += "\tSenha: "+this.senha+"\n";
+        return saida;
+    }
     
 }

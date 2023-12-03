@@ -43,4 +43,13 @@ public class Professor {
     public void setSenhaProfessor(String senhaProfessor) {
         this.senhaProfessor = senhaProfessor;
     }
+
+    public String toString(){
+        String saida = "";
+        saida += "ID: "+this.idProfessor;
+        saida += "\tNome: "+this.nomeProfessor;
+        saida += "\tLogin: "+this.emailProfessor;
+        saida += "\tSenha: "+this.senhaProfessor+"\n";
+        return saida;
+    }
 }
