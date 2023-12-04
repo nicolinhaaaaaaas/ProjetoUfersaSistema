@@ -2,21 +2,18 @@ package ProjetoPrototipo.src.ENTIDADES;
 
 public class Turma {
     private int idTurma;
-    private String nome;
     private String horario;
     private String local;
     private Professor professor;
 
-    public Turma(int idTurma, String nome, String horario, String local, Professor professor){
+    public Turma(int idTurma, String horario, String local, Professor professor){
         this.idTurma = idTurma;
-        this.nome = nome;
         this.horario = horario;
         this.local = local;
         this.professor = professor;
     }
 
-    public Turma(String nome, String horario, String local, Professor professor){
-        this.nome = nome;
+    public Turma( String horario, String local, Professor professor){
         this.horario = horario;
         this.local = local;
         this.professor = professor;
@@ -27,12 +24,6 @@ public class Turma {
     }
     public void setIdTurma(int idTurma) {
         this.idTurma = idTurma;
-    }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
     }
     public String getHorario() {
         return horario;

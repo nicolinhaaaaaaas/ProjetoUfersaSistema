@@ -168,7 +168,23 @@ public class Menu {
 
     // OPÇÕES DO PROFESSOR ////////////////////////////////////////////////////////////////////
 
+    public static void cadastroProfessor(){
+        
+    }
 
+    public static void loginProfessor(){
+
+    }
+
+    public static void adicionarDisciplina(){
+
+    }
+
+    public static void atualizarDisciplina(){
+
+    }
+
+    public static void 
 
     // CLEAR BUFFER ///////////////////////////////////////////////////////////////////////////
 
