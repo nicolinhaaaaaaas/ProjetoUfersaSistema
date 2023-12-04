@@ -52,5 +52,12 @@ public class Aluno {
         saida += "\tSenha: "+this.senha+"\n";
         return saida;
     }
+
+    public String alunoDescricao(){
+        String saida = "";
+        saida += "Nº Matrícula: "+this.numeroMatricula;
+        saida += "\tNome: "+this.nome+"\n";
+        return saida;
+    }
     
 }

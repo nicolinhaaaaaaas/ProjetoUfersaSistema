@@ -14,11 +14,18 @@ CREATE TABLE professor(
 
 CREATE TABLE turma(
     id_turma SERIAL PRIMARY KEY,
-    nome_turma VARCHAR(100),
     horario VARCHAR(10),
     local_turma VARCHAR(50),
     fk_id_professor INT,
-    FOREIGN KEY (fk_id_professor) REFERENCES professor (id_professor)
+    fk_id_disciplina INT,
+    FOREIGN KEY (fk_id_professor) REFERENCES professor (id_professor),
+    FOREIGN KEY (fk_id_disciplina) REFERENCES disciplina (id_disciplina)
+);
+
+CREATE TABLE disciplina(
+    id_disciplina SERIAL PRIMARY KEY,
+    nome_disciplina VARCHAR(100),
+    carga_horaria INT
 );
 
 CREATE TABLE matricula(

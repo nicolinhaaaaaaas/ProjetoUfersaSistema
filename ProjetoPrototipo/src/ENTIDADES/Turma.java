@@ -5,18 +5,21 @@ public class Turma {
     private String horario;
     private String local;
     private Professor professor;
+    private Disciplina disciplina;
 
-    public Turma(int idTurma, String horario, String local, Professor professor){
+    public Turma(int idTurma, String horario, String local, Professor professor, Disciplina disciplina){
         this.idTurma = idTurma;
         this.horario = horario;
         this.local = local;
         this.professor = professor;
+        this.disciplina = disciplina;
     }
 
-    public Turma( String horario, String local, Professor professor){
+    public Turma( String horario, String local, Professor professor, Disciplina disciplina){
         this.horario = horario;
         this.local = local;
         this.professor = professor;
+        this.disciplina = disciplina;
     }
     
     public int getIdTurma() {
@@ -43,14 +46,22 @@ public class Turma {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+    public Disciplina getDisciplina() {
+        return disciplina;
+    }
+    public void setDisciplina(Disciplina disciplina) {
+        this.disciplina = disciplina;
+    }
     
     public String toString(){
         String saida = "";
         saida += "ID da Turma: "+this.idTurma;
-        saida += "\tComponente Curricular: "+this.nome;
+        saida += "\tComponente Curricular: "+disciplina.getNomeDisciplina();
         saida += "\tLocal: "+this.local;
         saida += "\tHorário: "+this.horario;
         saida += "\nProfessor Responsável: "+this.professor.getNomeProfessor()+"\n";
         return saida;
     }
+
+    
 }

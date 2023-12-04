@@ -9,9 +9,21 @@ public class AlunoServico {
     
     public void cadastrarAluno(String nome, String email, String senha) throws SQLException{
         try{
-            Aluno novoAluno = new Aluno(nome, email, senha);
-            System.out.println("Cadastro bem sucedido!");
-            AlunoDao.inserirAluno(novoAluno);
+            Random random = new Random();
+            boolean possivel = false;
+            do{
+                int numMatricula = random.nextInt(900) + 100;
+                if(AlunoDao.buscarAlunoPorMat(numMatricula) == null){
+                    Aluno novoAluno = new Aluno(numMatricula, nome, email, senha);
+                    System.out.println("Cadastro bem sucedido!");
+                    AlunoDao.inserirAluno(novoAluno);
+                    System.out.println(novoAluno.toString());
+                    possivel = true;
+                }else{
+                    possivel = false;
+                }
+            }while(possivel == false);
+            
         }catch(InputMismatchException e){
             e.printStackTrace();
         }

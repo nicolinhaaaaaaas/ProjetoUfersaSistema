@@ -57,7 +57,7 @@ public class Presenca {
     public String toString(){
         String saida = "";
         saida += "Aluno: "+this.aluno.getNome();
-        saida += "\tTurma: "+this.turma.getNome();
+        saida += "\tTurma: "+this.turma.getIdTurma()+" "+this.turma.getDisciplina().getNomeDisciplina();
         saida += "\tData: "+this.data;
         if(this.presente == true){
             saida += "\tStatus: PRESENTE\n";

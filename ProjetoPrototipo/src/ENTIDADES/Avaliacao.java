@@ -74,8 +74,7 @@ public class Avaliacao {
     public String toString(){
         String saida = "";
         saida += "Aluno: "+this.getAluno().getNome();
-        saida += "\tTurma: "+this.getTurma().getNome();
-        
+        saida += "\tTurma: "+this.turma.getDisciplina().getNomeDisciplina();
         saida += "\nNota 1: "+this.nota1;
         saida += "\tNota 2: "+this.nota2;
         saida += "\tNota 3: "+this.nota3;

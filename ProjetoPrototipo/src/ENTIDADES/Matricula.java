@@ -38,7 +38,7 @@ public class Matricula {
     public String toString(){
         String saida = "";
         saida += "Aluno: "+this.aluno.getNome();
-        saida += "\tTurma: "+this.turma.getNome()+"\n";
+        saida += "\tTurma: "+this.turma.getDisciplina().getNomeDisciplina()+"\n";
         return saida;
     }
 }

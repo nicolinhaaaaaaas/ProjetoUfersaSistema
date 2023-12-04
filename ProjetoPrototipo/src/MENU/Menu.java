@@ -182,9 +182,7 @@ public class Menu {
 
     public static void atualizarDisciplina(){
 
-    }
-
-    public static void 
+    } 
 
     // CLEAR BUFFER ///////////////////////////////////////////////////////////////////////////
 
