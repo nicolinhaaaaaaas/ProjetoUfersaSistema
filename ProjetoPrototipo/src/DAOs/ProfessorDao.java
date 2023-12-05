@@ -70,7 +70,7 @@ public class ProfessorDao {
         }
     }
 
-    public static List<Professor> listarTodosprofessores() throws SQLException{
+    public static List<Professor> listarTodosProfessores() throws SQLException{
         List<Professor> professores = new ArrayList<>();
         String sql = "SELECT * FROM professor;";
 

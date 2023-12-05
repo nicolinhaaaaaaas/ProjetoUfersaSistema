@@ -14,13 +14,15 @@ public class TurmaDao {
     }
 
     public static void inserirTurma(Turma turma) throws SQLException{
-        String sql = "INSERT INTO turma (horario, local_turma, fk_id_professor, fk_id_disciplina) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO turma (numero_turma, horario, local_turma, participantes, fk_id_professor, fk_id_disciplina) VALUES (?,?,?,?,?,?);";
 
         try(PreparedStatement preparedStatement = conexaoTurma.prepareStatement(sql)){
-            preparedStatement.setString(1, turma.getHorario());
-            preparedStatement.setString(2, turma.getLocal());
-            preparedStatement.setInt(3, turma.getProfessor().getIdProfessor());
-            preparedStatement.setInt(4, turma.getDisciplina().getIdDisciplina());
+            preparedStatement.setInt(1, turma.getNumeroTurma());
+            preparedStatement.setString(2, turma.getHorario());
+            preparedStatement.setString(3, turma.getLocal());
+            preparedStatement.setInt(4, turma.getParticipantes());
+            preparedStatement.setInt(5, turma.getProfessor().getIdProfessor());
+            preparedStatement.setInt(6, turma.getDisciplina().getIdDisciplina());
         }
     }
 
@@ -39,7 +41,23 @@ public class TurmaDao {
         return null;
     }
 
-    public static List<Turma> listarTodasturmas() throws SQLException{
+    public static Turma buscarTurmaPorNumeroEDisciplina(int numero, Disciplina disciplina) throws SQLException{
+        String sql = "SELECT * FROM turma WHERE numero_turma = ? AND fk_id_disciplina = ?;";
+
+        try(PreparedStatement preparedStatement = conexaoTurma.prepareStatement(sql)){
+            preparedStatement.setInt(1, numero);
+            preparedStatement.setInt(2, disciplina.getIdDisciplina());
+
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                if(resultSet.next()){
+                    return mapearResultSetParaTurma(resultSet;)
+                }
+            }
+        }
+        return null;
+    }
+
+    public static List<Turma> listarTodasTurmas() throws SQLException{
         List<Turma> turmas = new ArrayList<>();
         String sql = "SELECT * FROM turma;";
 
@@ -53,15 +71,43 @@ public class TurmaDao {
         return turmas;
     }
 
-    public static void atualizarturma(Turma turma) throws SQLException{
-        String sql = "UPDATE turma SET horario = ?, local = ?, fk_id_professor = ?, fk_id_disciplina WHERE id_turma = ?;";
+    public static List<Turma> listarTurmasPorDisciplina(int idDisciplina) throws SQLException{
+        List<Turma> turmas = new ArrayList<>();
+        String sql = "SELECT * FROM turma WHERE fk_id_disciplina = ?;";
+
+        try(PreparedStatement preparedStatement = conexaoTurma.prepareStatement(sql)){
+            preparedStatement.setInt(1, idDisciplina);
+
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while(resultSet.next()){
+                    turmas.add(mapearResultSetParaTurma(resultSet));
+                }
+            }
+        }
+        return turmas;
+    }   
+
+    public static void mudarNumeroParticipantes(Turma turma) throws SQLException{
+        String sql = "UPDATE turma SET participantes = ? WHERE id_turma = ?;";
+
+        try(PreparedStatement preparedStatement = conexaoTurma.prepareStatement(sql)){
+            preparedStatement.setInt(1, turma.getParticipantes());
+            preparedStatement.setInt(2, turma.getIdTurma());
+
+            preparedStatement.executeUpdate();
+        }
+    }
+
+    public static void atualizarTurma(Turma turma) throws SQLException{
+        String sql = "UPDATE turma SET numero_turma = ?, horario = ?, local = ?, fk_id_professor = ?, fk_id_disciplina WHERE id_turma = ?;";
         
         try(PreparedStatement preparedStatement = conexaoTurma.prepareStatement(sql)){
-            preparedStatement.setString(1, turma.getHorario());
-            preparedStatement.setString(2, turma.getLocal());
-            preparedStatement.setInt(3, turma.getProfessor().getIdProfessor());
-            preparedStatement.setInt(4, turma.getDisciplina().getIdDisciplina());
-            preparedStatement.setInt(5, turma.getIdTurma());
+            preparedStatement.setInt(1, turma.getNumeroTurma());
+            preparedStatement.setString(2, turma.getHorario());
+            preparedStatement.setString(3, turma.getLocal());
+            preparedStatement.setInt(4, turma.getProfessor().getIdProfessor());
+            preparedStatement.setInt(5, turma.getDisciplina().getIdDisciplina());
+            preparedStatement.setInt(6, turma.getIdTurma());
 
             preparedStatement.executeUpdate();
         }
@@ -69,12 +115,14 @@ public class TurmaDao {
 
     public static Turma mapearResultSetParaTurma(ResultSet resultSet) throws SQLException{
         int id_turma = resultSet.getInt("id_turma");
+        int numero_turma = resultSet.getInt("numero_turma");
         String horario = resultSet.getString("horario");
         String local_turma = resultSet.getString("local_turma");
         int id_professor = resultSet.getInt("fk_id_professor");
         int id_disciplina = resultSet.getInt("fk_id_disciplina");
+        int participantes = resultSet.getInt("participantes")
 
         // falta fazer um negocio de buscar o turma
-        return new Turma(id_turma, horario, local_turma, ProfessorDao.buscarProfessorPorId(id_professor), );
+        return new Turma(id_turma, numero_turma, horario, local_turma, ProfessorDao.buscarProfessorPorId(id_professor), DisciplinaDao.buscarDisciplinaPorId(id_disciplina), participantes);
     }
 }

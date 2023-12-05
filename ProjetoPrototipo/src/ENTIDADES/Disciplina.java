@@ -39,7 +39,7 @@ public class Disciplina {
         String saida = "";
         saida += "ID: "+this.idDisciplina;
         saida += "\tComponente curricular: "+this.nomeDisciplina;
-        saida += "\tCarga horária: "+this.cargaHoraria+"\n";
+        saida += "\tCarga horária: "+this.cargaHoraria+" Horas\n";
         return saida;
     }
 }

@@ -14,8 +14,10 @@ CREATE TABLE professor(
 
 CREATE TABLE turma(
     id_turma SERIAL PRIMARY KEY,
+    numero_turma INT,
     horario VARCHAR(10),
     local_turma VARCHAR(50),
+    participantes INT,
     fk_id_professor INT,
     fk_id_disciplina INT,
     FOREIGN KEY (fk_id_professor) REFERENCES professor (id_professor),
