@@ -2,6 +2,7 @@ package ProjetoPrototipo.src.SERVICOS;
 
 import java.util.InputMismatchException;
 
+import ProjetoPrototipo.src.DAOs.AvaliacaoDao;
 import ProjetoPrototipo.src.DAOs.DisciplinaDao;
 import ProjetoPrototipo.src.DAOs.MatriculaDao;
 import ProjetoPrototipo.src.DAOs.TurmaDao;
@@ -50,6 +51,26 @@ public class TurmaServico {
         }catch(InputMismatchException e){
             e.printStackTrace();
         }
+    }
+
+    public void atualizarTurma(Turma turma, String horario, String local){
+        turma.setHorario(horario);
+        turma.setLocal(local);
+        try{
+            TurmaDao.atualizarTurma(turma);
+            System.out.println("Dados da turma atualizados!");
+            System.out.println(turma.toString());
+        }catch(InputMismatchException e){
+            e.printStackTrace();    
+        }
+    }
+
+    public void excluirTurma(Turma turma){
+        PresencaDao.excluirPresencaPorTurma(turma.getIdTurma()); // pra excluir a turma, precisa excluir td isso antes
+        AvaliacaoDao.excluirAvaliacaoPorTurma(turma.getIdTurma());
+        MatriculaDao.excluirMatriculaPorTurma(turma.getIdTurma());
+        TurmaDao.excluirTurma(turma.getIdTurma());
+        System.out.println("Turma excluída com sucesso!");
     }
 
     public String mostrarTurmasDisponiveis(Disciplina disciplina){

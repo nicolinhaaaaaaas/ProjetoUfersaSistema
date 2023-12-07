@@ -182,7 +182,7 @@ public class Menu {
         System.out.println(turmaServico.turmasCadastradas(aluno));
     }
 
-    public static void verDadosTurma(){
+    public static void verDadosTurma(Aluno aluno){
         Scanner entrada = new Scanner(System.in);
 
         try{
@@ -388,7 +388,39 @@ public class Menu {
         Scanner entrada = new Scanner(System.in);
 
         try{
+            System.out.println("Disciplinas cadastradas no sistema: ");
+            System.out.println(turmaServico.mostrarTodasDisciplinas());
+            System.out.println("Digite o ID da disciplina que deseja verificar: ");
+            String idDisciplina = entrada.nextLine();
 
+            Disciplina disciplinaSolicitada = turmaServico.buscarDisciplinaPorId(Integer.parseInt(idDisciplina));
+            if(disciplinaSolicitada != null){
+                System.out.println("Turmas disponíveis da disciplina: ");
+                System.out.println(turmaServico.mostrarTurmasDisponiveis(disciplinaSolicitada));
+                System.out.println("Digite o Número da turma que deseja atualizar: ");
+                String numeroTurma = entrada.nextLine();
+
+                Turma turmaSolicitada = turmaServico.buscarTurmaPorNumeroEDisciplina(Integer.parseInt(numeroTurma), disciplinaSolicitada);
+                if(turmaSolicitada != null){
+                    System.out.println("Dados da turma solicitada: ");
+                    System.out.println(turmaSolicitada.toString());
+                    System.out.println("Deseja atualizá-los? (1)-Sim (0)-Não");
+                    String opcao = entrada.nextLine();
+                    if(opcao.equals("1")){
+                        System.out.println("Por favor, digite o novo local da aula: (EX: 'Bloco 1, sala 3')");
+                        String novoLocal = entrada.nextLine();
+                        System.out.println("Por favor, digite o novo horário da aula: (EX: '09:45 - 11:55')");
+                        String novoHorario = entrada.nextLine();
+                        turmaServico.atualizarTurma(turmaSolicitada, novoLocal, novoHorario);
+                    }else{
+                        System.out.println("Operação cancelada.");
+                    }
+                }else{
+                    System.out.println("Turma não encontrada. Operação cancelada.");
+                }
+            }else{
+                System.out.println("Disciplina não encontrada. Operação cancelada.");
+            }
         }catch(InputMismatchException e){
             e.printStackTrace();
         }finally{
@@ -396,11 +428,39 @@ public class Menu {
         }
     }
 
-    public static void excluirTurma(){
+    public static void excluirTurma(Professor professor){
         Scanner entrada = new Scanner(System.in);
 
         try{
+            System.out.println("Disciplinas cadastradas no sistema: ");
+            System.out.println(turmaServico.mostrarTodasDisciplinas());
+            System.out.println("Digite o ID da disciplina que deseja verificar: ");
+            String idDisciplina = entrada.nextLine();
 
+            Disciplina disciplinaSolicitada = turmaServico.buscarDisciplinaPorId(Integer.parseInt(idDisciplina));
+            if(disciplinaSolicitada != null){
+                System.out.println("Turmas disponíveis da disciplina: ");
+                System.out.println(turmaServico.mostrarTurmasDisponiveis(disciplinaSolicitada));
+                System.out.println("Digite o Número da turma que deseja excluir: ");
+                String numeroTurma = entrada.nextLine();
+
+                Turma turmaSolicitada = turmaServico.buscarTurmaPorNumeroEDisciplina(Integer.parseInt(numeroTurma), disciplinaSolicitada);
+                if(turmaSolicitada != null){
+                    System.out.println("Dados da turma solicitada: ");
+                    System.out.println(turmaSolicitada.toString());
+                    System.out.println("Deseja excluir essa turma? (1)-Sim (0)-Não");
+                    String opcao = entrada.nextLine();
+                    if(opcao.equals("1")){
+                        turmaServico.excluirTurma(turmaSolicitada);
+                    }else{
+                        System.out.println("Operação cancelada.");
+                    }
+                }else{
+                    System.out.println("Turma não encontrada. Operação cancelada.");
+                }
+            }else{
+                System.out.println("Disciplina não encontrada. Operação cancelada.");
+            }
         }catch(InputMismatchException e){
             e.printStackTrace();
         }finally{
