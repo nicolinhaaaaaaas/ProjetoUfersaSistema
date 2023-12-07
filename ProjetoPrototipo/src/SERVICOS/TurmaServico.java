@@ -33,6 +33,14 @@ public class TurmaServico {
         return turmasPorAluno;
     }
 
+    public void cancelarMatricula(Aluno aluno, Turma turma){
+        MatriculaDao.excluirMatricula(aluno.getNumeroMatricula(), turma.getDisciplina().getIdDisciplina());
+        System.out.println("Matrícula cancelada com sucesso!");
+        int participantes = turma.getParticipantes() - 1;
+        turma.setParticipantes(participantes);
+        mudarParticipantes(turma);
+    }
+
     public void criarTurma(String horario, String local, Professor professor, Disciplina disciplina){
         try{
             int numeroTurma = TurmaDao.listarTurmasPorDisciplina(disciplina.getIdDisciplina()).size() + 1;
@@ -59,6 +67,14 @@ public class TurmaServico {
         }else{
             return null;
         }
+    }
+
+    public String mostrarAlunosPorTurma(Turma turma){
+        String alunosPorTurma = "";
+        for(Matricula matricula : MatriculaDao.listarMatriculasPorTurma(turma.getIdTurma())){
+            alunosPorTurma += matricula.toString();
+        }
+        return alunosPorTurma;
     }
 
     public void mudarParticipantes(Turma turma){

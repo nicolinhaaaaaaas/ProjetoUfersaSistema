@@ -152,7 +152,25 @@ public class Menu {
         Scanner entrada = new Scanner(System.in);
 
         try{
+            System.out.println("Disciplinas matriculadas: ");
+            System.out.println(turmaServico.turmasCadastradas(aluno));
+            System.out.println("Digite o ID da disciplina que deseja cancelar: (0)-Cancelar");
+            String escolha = entrada.nextLine();
+            Disciplina disciplinaEscolhida = turmaServico.buscarDisciplinaPorId(Integer.parseInt(escolha));
+            if(disciplinaEscolhida != null){
+                System.out.println("Você escolheu a Disciplina: "+disciplinaEscolhida.getNomeDisciplina());
+                System.out.println("Digite o Número da turma que deseja cancelar: (0)-Cancelar");
+                String escolhaTurma = entrada.nextLine();
 
+                Turma turmaEscolhida = turmaServico.buscarTurmaPorNumeroEDisciplina(Integer.parseInt(escolhaTurma), disciplinaEscolhida);
+                if(turmaEscolhida != null){
+                    turmaServico.cancelarMatricula(aluno, turmaEscolhida);
+                }else{
+                    System.out.println("Turma não existente. Operação cancelada.");
+                }
+            }else{
+                System.out.println("Disciplina inválida. Operação cancelada.");
+            }
         }catch(InputMismatchException e){
             e.printStackTrace();
         }finally{
@@ -168,7 +186,7 @@ public class Menu {
         Scanner entrada = new Scanner(System.in);
 
         try{
-
+            
         }catch(InputMismatchException e){
             e.printStackTrace();
         }finally{
@@ -389,6 +407,34 @@ public class Menu {
             clearBuffer(entrada);
         }
     }
+
+    // OPÇÕES DE PRESENÇA /////////////////////////////////////////////////////////////////////
+
+    public static void darPresenca(){
+        Scanner entrada = new Scanner(System.in);
+
+        try{
+
+        }catch(InputMismatchException e){
+            e.printStackTrace();
+        }finally{
+            clearBuffer(entrada);
+        }
+    }
+
+    public static void excluirPresenca(){
+        Scanner entrada = new Scanner(System.in);
+
+        try{
+
+        }catch(InputMismatchException e){
+            e.printStackTrace();
+        }finally{
+            clearBuffer(entrada);
+        }
+    }
+
+    public static void
 
     // CLEAR BUFFER ///////////////////////////////////////////////////////////////////////////
 

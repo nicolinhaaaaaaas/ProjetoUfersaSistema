@@ -69,11 +69,12 @@ public class MatriculaDao {
         return matriculasTurma;
     }
 
-    public static void excluirMatricula (int idMatricula) throws SQLException{
-        String sql = "DELETE FROM matricula WHERE id_matricula = ?;";
+    public static void excluirMatricula (int idAluno, int idDisciplina) throws SQLException{
+        String sql = "DELETE FROM matricula WHERE fk_id_aluno = ? AND fk_id_disciplina = ?;";
 
         try(PreparedStatement preparedStatement = conexaoMatricula.prepareStatement(sql)){
-            preparedStatement.setInt(1, idMatricula);
+            preparedStatement.setInt(1, idAluno);
+            preparedStatement.setInt(2, idDisciplina);
 
             preparedStatement.executeUpdate();
         }
