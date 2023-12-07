@@ -1,0 +1,95 @@
+@startuml ProjetoPooLoja
+
+    class Aluno{
+        -int numeroMatricula
+        -String nomeAluno
+        -String emailAluno
+        -String senhaAluno
+        
+        +String toString()
+        +void cadastrarAluno()
+        +boolean verificarLogin()
+        +Aluno loginAluno()
+        +Aluno getAlunoPorMat()
+        +void atualizarAluno()
+    }
+
+    class Professor{
+        -int idProfessor
+        -String nomeProfessor
+        -String emailProfessor
+        -String senhaProfessor
+
+        +String toString()
+    }
+
+    class Turma{
+        -int idTurma
+        -int numeroTurma
+        -String horario
+        -String local
+        -Professor rofessor
+        -Disciplina disciplina
+        -int participantes
+
+        +String toString()
+        +void criarTurma()
+        +void atualizarTurma()
+        +void excluirTurma()
+        +String mostrarTurmasDisponiveis()
+        +String mostrarTurmasProfessor()
+        +Turma buscarTurmaPorNumeroEDisciplina()
+        +String mostrarAlunosPorTurma()
+        +void mudarParticipantes()
+
+    }
+
+    class Disciplina{
+        -int idDisciplina
+        -String nomeDisciplina
+        -int cargaHoraria
+
+        +String toString()
+        +void criarDisciplina()
+        +Disciplina buscarDisciplinaPorNome()
+        +Disciplina buscarDisciplinaPorId()
+        +String mostrarTodasDisciplinas()
+        +void atualizarDisciplina()
+        +void apagarDisciplina()
+    }
+
+    class Avaliacao{
+        -int idAvaliacao
+        -Aluno aluno
+        -Turma turma
+        -double nota1
+        -double nota2
+        -double nota3
+        -double notaRecuperacao
+
+        +String toString()
+    }
+
+    class Matricula{
+        -int idMatricula
+        -Aluno aluno
+        -Turma turma
+
+        +String toString()
+    }
+
+    class Presenca{
+        -int idPresenca
+        -Aluno aluno
+        -Turma turma
+        -Date data
+        -boolean presente
+
+        +String toString()
+    }
+
+    Calcado -- Estoque  
+   
+
+
+@enduml
